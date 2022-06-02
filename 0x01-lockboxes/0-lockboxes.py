@@ -11,26 +11,25 @@ def canUnlockAll(boxes):
     and each box may contain keys to the other boxes.
     Determine if all the boxes can be opened.
     """
-    if boxes is None:
-        return False
-    if len(boxes) == 1:
-        return True
-    # Track the visited boxes
-    visited - set()
-    # The first box is unlocked
-    visited.add(0)
+    length = len(boxes)
+    keys = set()
+    opened_boxes = []
+    i = 0
 
-    # Use a stack to do a depth first search
-    stack = []
-    stack.append(0)
+    while i < length:
+        oldi = i
+        opened_boxes.append(i)
+        keys.update(boxes[i])
+        for key in keys:
+            if key != 0 and key < length and key not in opened_boxes:
+                i = key
+                break
+        if oldi != i:
+            continue
+        else:
+            break
 
-    while stack:
-        keys = boxes[stack.pop()]
-        for key key in keys:
-            if key not in visited:
-                visited.add(key)
-                stack.append(key)
-    # All have been visited if the
-    # number of boxes is equal to the
-    # number of visited boxes
-    return len(boxes) == len(visited)
+    for i in range(length):
+        if i not in opened_boxes and i != 0:
+            return False
+    return True
