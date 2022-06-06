@@ -56,7 +56,6 @@ def determine_positions(board, row, n):
                 determine_positions(board, row + 1, n)
 
 
-
 def create_board(size):
     """Generates the board"""
     return [0 * size for i in range(size)]
